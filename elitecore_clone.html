@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>EliteCore Ultra ChatGPT Clone</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/@mlc-ai/web-llm/dist/index.js"></script>
+<style>
+body{background:#000;color:#0ff;font-family:monospace}
+.panel{border:1px solid #0ff;padding:5px;margin:5px}
+.glow{text-shadow:0 0 10px #0ff}
+</style>
+</head>
+
+<body class="h-screen flex">
+
+<!-- SIDEBAR -->
+<div id="sidebar" class="w-64 panel overflow-y-auto">
+<button onclick="newChat()" class="w-full bg-cyan-500 text-black">+ New Chat</button>
+<div id="chatList"></div>
+</div>
+
+<!-- MAIN -->
+<div class="flex-1 flex flex-col">
+
+<div class="panel flex justify-between">
+<div class="glow text-xl">EliteCore GPT GOD MODE</div>
+<div id="clock"></div>
+<select id="model">
+<option value="offline">Offline WebLLM</option>
+<option value="online">Online Proxy</option>
+</select>
+</div>
+
+<div id="chat" class="flex-1 panel overflow-y-auto"></div>
+
+<div class="panel flex gap-2">
+<button onclick="voiceInput()">🎤 Voice</button>
+<button onclick="tts()">🔊 Speak</button>
+<button onclick="terminal()">💻 System</button>
+<button onclick="admin()">👑 Admin</button>
+</div>
+
+<div class="panel flex gap-2">
+<textarea id="input" class="flex-1 bg-black border border-cyan-500"></textarea>
+<button onclick="send()">SEND</button>
+</div>
+
+</div>
+
+<script>
+// CLOCK
+setInterval(()=>clock.innerText=new Date().toLocaleString(),1000);
+
+// CHAT STORAGE
+let chats=[[]],current=0;
+function newChat(){chats.push([]);current=chats.length-1;renderList();}
+
+// UI
+function renderList(){
+ chatList.innerHTML="";
+ chats.forEach((c,i)=>{
+  let b=document.createElement("button");
+  b.innerText="Chat "+i;
+  b.onclick=()=>{current=i;renderChat();}
+  chatList.appendChild(b);
+ });
+}
+function renderChat(){
+ chat.innerHTML="";
+ chats[current].forEach(m=>addMsg(m.role,m.text));
+}
+function addMsg(role,text){
+ let d=document.createElement("div");
+ d.className="panel "+(role=="user"?"text-right":"text-left");
+ d.innerText=text;
+ chat.appendChild(d);
+ chat.scrollTop=999999;
+}
+
+// INDEXEDDB MEMORY
+let db;
+indexedDB.open("elitecoreDB",1).onupgradeneeded=e=>{
+ db=e.target.result;
+ db.createObjectStore("memory",{autoIncrement:true});
+};
+indexedDB.open("elitecoreDB",1).onsuccess=e=>db=e.target.result;
+function saveMemory(t){
+ let tx=db.transaction("memory","readwrite");
+ tx.objectStore("memory").add({t, time:Date.now()});
+}
+
+// OFFLINE AI
+let llm;
+(async()=>{ llm=await webllm.CreateMLCEngine("Llama-3-8B-Instruct"); })();
+
+// SEND
+async function send(){
+ let t=input.value.trim();
+ if(!t)return;
+ input.value="";
+ chats[current].push({role:"user",text:t});
+ addMsg("user",t);
+ saveMemory(t);
+
+ let reply="";
+ if(model.value=="offline"){
+  reply=await llm.generate("User:"+t);
+ } else {
+  let r=await fetch("http://localhost:3000/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:[{role:"user",content:t}]})});
+  let d=await r.json();
+  reply=d.choices[0].message.content;
+ }
+
+ chats[current].push({role:"ai",text:reply});
+ addMsg("ai",reply);
+}
+
+// VOICE INPUT
+function voiceInput(){
+ let r=new webkitSpeechRecognition();
+ r.onresult=e=>input.value=e.results[0][0].transcript;
+ r.start();
+}
+
+// TTS
+function tts(){
+ let last=chats[current].slice(-1)[0]?.text;
+ speechSynthesis.speak(new SpeechSynthesisUtterance(last));
+}
+
+// SYSTEM TERMINAL
+function terminal(){
+ fetch("http://localhost:3000/api/system")
+ .then(r=>r.json()).then(d=>alert(JSON.stringify(d,null,2)));
+}
+
+// ADMIN PANEL
+function admin(){
+ let k=prompt("Admin Key");
+ if(k=="elitecore") alert("ADMIN MODE ENABLED");
+}
+
+newChat();
+</script>
+</body>
+</html>
