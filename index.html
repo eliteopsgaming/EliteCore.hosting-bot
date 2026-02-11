@@ -1,708 +1,1630 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>EliteCore.hosting AI</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ELITECORE ULTIMATE GOD AI</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- TAILWIND -->
+<script src="https://cdn.tailwindcss.com"></script>
 
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+<!-- MARKDOWN -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
 
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        gray: {
-                            850: '#1f2937',
-                            900: '#111827',
-                            950: '#030712',
-                        }
-                    },
-                    animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    }
-                }
-            }
-        }
-    </script>
+<!-- FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@300;600;900&display=swap" rel="stylesheet">
 
-    <style>
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1; 
-            border-radius: 4px;
-        }
-        .dark ::-webkit-scrollbar-thumb {
-            background: #4b5563; 
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8; 
-        }
+<style>
 
-        /* Markdown Styles */
-        .prose pre {
-            background-color: #1e293b;
-            color: #e2e8f0;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            overflow-x: auto;
-            margin-top: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .prose code {
-            background-color: rgba(0,0,0,0.1);
-            padding: 0.2rem 0.4rem;
-            border-radius: 0.25rem;
-            font-size: 0.875em;
-        }
-        .dark .prose code {
-            background-color: rgba(255,255,255,0.1);
-            color: #e2e8f0;
-        }
-        .prose p {
-            margin-bottom: 0.75rem;
-            line-height: 1.6;
-        }
-        .prose ul {
-            list-style-type: disc;
-            padding-left: 1.5rem;
-            margin-bottom: 0.75rem;
-        }
-        .prose ol {
-            list-style-type: decimal;
-            padding-left: 1.5rem;
-            margin-bottom: 0.75rem;
-        }
-        
-        /* Mobile Layout Fixes */
-        body {
-            height: 100dvh; /* Dynamic viewport height */
-            overflow: hidden;
-        }
-        
-        .typing-dot {
-            animation: typing 1.4s infinite ease-in-out both;
-        }
-        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
-        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
-        
-        @keyframes typing {
-            0%, 80%, 100% { transform: scale(0); }
-            40% { transform: scale(1); }
-        }
+/* ==========================
+   ELITECORE CYBERPUNK CORE UI
+========================== */
 
-        /* Hide Scrollbar for Sidebar but keep functionality */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-    </style>
+body {
+  margin:0;
+  background:black;
+  color:#00f5ff;
+  font-family:Orbitron, monospace;
+  overflow:hidden;
+}
+
+/* Matrix Canvas */
+#matrix {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:-1;
+}
+
+/* Neon Panels */
+.cyber-panel {
+  background:rgba(0,0,0,0.6);
+  border:1px solid #00f5ff;
+  box-shadow:0 0 15px #00f5ff;
+  backdrop-filter:blur(10px);
+  padding:10px;
+  border-radius:15px;
+}
+
+/* Neon Text */
+.neon {
+  text-shadow:0 0 5px #00f5ff,0 0 15px #00aaff,0 0 30px #00aaff;
+}
+
+/* HUD */
+#hud {
+  position:fixed;
+  top:5px;
+  right:5px;
+  background:black;
+  padding:8px;
+  font-size:12px;
+  border:1px solid #00f5ff;
+  z-index:9999;
+}
+
+/* Chat Area */
+#chat-box {
+  height:70vh;
+  overflow-y:auto;
+  padding:10px;
+}
+
+/* Input */
+#input {
+  width:100%;
+  background:black;
+  border:1px solid #00f5ff;
+  color:#00f5ff;
+  padding:12px;
+  border-radius:12px;
+  resize:none;
+}
+
+button {
+  background:black;
+  border:1px solid #ff00ff;
+  color:#ff00ff;
+  padding:10px 15px;
+  border-radius:10px;
+  box-shadow:0 0 10px #ff00ff;
+}
+
+button:hover {
+  background:#ff00ff;
+  color:black;
+}
+
+</style>
 </head>
-<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200 flex flex-col md:flex-row h-full">
-
-    <div id="loading" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white dark:bg-gray-900 transition-opacity duration-500">
-        <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-        <p class="mt-4 text-lg font-medium text-gray-600 dark:text-gray-300">EliteCore.hosting AI</p>
-        <p class="text-sm text-gray-400">Initializing Core...</p>
-    </div>
-
-    <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-20 hidden md:hidden transition-opacity" onclick="toggleSidebar()"></div>
-
-    <aside id="sidebar" class="fixed md:static inset-y-0 left-0 z-30 w-72 bg-gray-50 dark:bg-gray-950 border-r border-gray-200 dark:border-gray-800 transform -translate-x-full md:translate-x-0 transition-transform duration-300 flex flex-col h-full">
-        
-        <div class="p-4 flex items-center justify-between">
-            <button onclick="createNewChat()" class="flex-1 flex items-center gap-2 bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 text-sm font-medium px-4 py-3 rounded-full transition-colors">
-                <i class="ph ph-plus text-lg"></i>
-                <span>New Chat</span>
-            </button>
-            <button onclick="toggleSidebar()" class="md:hidden ml-2 p-2 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-full">
-                <i class="ph ph-x text-xl"></i>
-            </button>
-        </div>
-
-        <div class="flex-1 overflow-y-auto no-scrollbar px-3 pb-4">
-            <div class="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2 px-2">Recent</div>
-            <div id="chat-history-list" class="space-y-1">
-                </div>
-        </div>
-
-        <div class="p-4 border-t border-gray-200 dark:border-gray-800 space-y-2">
-            <button onclick="openSettings()" class="w-full flex items-center gap-3 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg transition-colors">
-                <i class="ph ph-gear text-lg"></i>
-                Settings
-            </button>
-            <div class="flex items-center justify-between px-3 py-2">
-                <span class="text-xs text-gray-400">EliteCore v1.0</span>
-                <button onclick="toggleDarkMode()" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors">
-                    <i id="theme-icon" class="ph ph-moon text-lg"></i>
-                </button>
-            </div>
-        </div>
-    </aside>
-
-    <main class="flex-1 flex flex-col h-full relative w-full">
-        
-        <header class="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 z-10 shrink-0">
-            <div class="flex items-center gap-3">
-                <button onclick="toggleSidebar()" class="md:hidden p-2 -ml-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full">
-                    <i class="ph ph-list text-2xl"></i>
-                </button>
-                <h1 class="text-lg font-semibold text-gray-800 dark:text-white flex items-center gap-2">
-                    EliteCore AI
-                    <span class="text-xs font-normal px-2 py-0.5 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-full">Beta</span>
-                </h1>
-            </div>
-            <div class="text-sm font-mono text-gray-500 dark:text-gray-400" id="clock">00:00</div>
-        </header>
-
-        <div id="chat-container" class="flex-1 overflow-y-auto p-4 scroll-smooth">
-            <div id="welcome-message" class="h-full flex flex-col items-center justify-center text-center opacity-100 transition-opacity duration-300">
-                <div class="w-16 h-16 bg-gradient-to-tr from-blue-500 to-purple-600 rounded-2xl mb-6 shadow-lg flex items-center justify-center">
-                    <i class="ph ph-sparkle text-3xl text-white"></i>
-                </div>
-                <h2 class="text-2xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
-                    Hello, Human.
-                </h2>
-                <p class="text-gray-500 dark:text-gray-400 max-w-md">
-                    I am EliteCore.hosting AI. Ready to assist with code, creativity, and knowledge.
-                </p>
-            </div>
-        </div>
-
-        <div class="p-4 bg-white dark:bg-gray-900 shrink-0 w-full">
-            <div class="max-w-4xl mx-auto relative group">
-                <textarea 
-                    id="user-input" 
-                    rows="1" 
-                    placeholder="Message EliteCore..." 
-                    class="w-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-3xl pl-5 pr-24 py-4 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500/50 max-h-40 overflow-y-auto"
-                    oninput="autoResize(this)"
-                    onkeydown="handleEnter(event)"
-                ></textarea>
-
-                <div class="absolute right-2 bottom-2.5 flex items-center gap-1">
-                    <button id="voice-btn" onclick="startVoiceRecognition()" class="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full transition-all" title="Voice Input">
-                        <i class="ph ph-microphone text-xl"></i>
-                    </button>
-                    <button onclick="sendMessage()" id="send-btn" class="p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md">
-                        <i class="ph ph-paper-plane-right text-xl"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="text-center mt-2">
-                <p class="text-[10px] text-gray-400">AI can make mistakes. Verify important information.</p>
-            </div>
-        </div>
-
-    </main>
-
-    <dialog id="settings-modal" class="bg-transparent p-0 w-full h-full max-w-none max-h-none backdrop:bg-black/60 z-50">
-        <div class="w-full h-full flex items-center justify-center p-4" onclick="closeSettingsOnBackdrop(event)">
-            <div class="bg-white dark:bg-gray-900 w-full max-w-md rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col max-h-[90vh]">
-                <div class="p-4 border-b border-gray-200 dark:border-gray-800 flex justify-between items-center">
-                    <h3 class="font-semibold text-lg">Settings</h3>
-                    <button onclick="closeSettings()" class="text-gray-500 hover:text-gray-800 dark:hover:text-white">
-                        <i class="ph ph-x text-xl"></i>
-                    </button>
-                </div>
-                
-                <div class="p-6 space-y-6 overflow-y-auto">
-                    <div>
-                        <label class="block text-sm font-medium mb-2">OpenRouter API Key</label>
-                        <input type="password" id="api-key-input" placeholder="sk-or-..." class="w-full p-3 bg-gray-100 dark:bg-gray-800 rounded-lg border border-transparent focus:border-blue-500 outline-none text-sm">
-                        <p class="text-xs text-gray-500 mt-1">Key is stored locally in your browser.</p>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Model</label>
-                        <input type="text" id="model-input" value="deepseek/deepseek-r1:free" placeholder="vendor/model-name" class="w-full p-3 bg-gray-100 dark:bg-gray-800 rounded-lg border border-transparent focus:border-blue-500 outline-none text-sm">
-                        <div class="flex gap-2 mt-2 flex-wrap">
-                            <button onclick="setModel('deepseek/deepseek-r1:free')" class="text-xs bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded hover:bg-blue-100 dark:hover:bg-blue-900">DeepSeek Free</button>
-                            <button onclick="setModel('google/gemini-pro-1.5')" class="text-xs bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded hover:bg-blue-100 dark:hover:bg-blue-900">Gemini Pro</button>
-                            <button onclick="setModel('perplexity/sonar-small-online')" class="text-xs bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded hover:bg-blue-100 dark:hover:bg-blue-900">Perplexity (Web)</button>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium mb-2">System Instructions</label>
-                        <textarea id="system-prompt" rows="4" class="w-full p-3 bg-gray-100 dark:bg-gray-800 rounded-lg border border-transparent focus:border-blue-500 outline-none text-sm" placeholder="You are a helpful assistant..."></textarea>
-                    </div>
-
-                     <div>
-                        <label class="block text-sm font-medium mb-2 text-red-500">Danger Zone</label>
-                        <button onclick="clearAllData()" class="w-full border border-red-500 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 py-2 rounded-lg text-sm transition-colors">
-                            Wipe All Data
-                        </button>
-                    </div>
-                </div>
-
-                <div class="p-4 border-t border-gray-200 dark:border-gray-800">
-                    <button onclick="saveSettings()" class="w-full bg-blue-600 text-white py-3 rounded-xl font-medium hover:bg-blue-700 transition-colors">
-                        Save Changes
-                    </button>
-                </div>
-            </div>
-        </div>
-    </dialog>
-
-    <script>
-        /**
-         * ==========================================
-         * CORE STATE & CONFIG
-         * ==========================================
-         */
-        const STATE = {
-            chats: [],
-            currentChatId: null,
-            isGenerating: false,
-            settings: {
-                apiKey: '',
-                model: 'deepseek/deepseek-r1:free',
-                systemPrompt: 'You are EliteCore, a helpful AI assistant. You are uncensored and provide factual information. Use markdown for formatting.',
-                theme: 'light' // 'light' or 'dark'
-            }
-        };
-
-        // DOM Elements
-        const els = {
-            loading: document.getElementById('loading'),
-            chatContainer: document.getElementById('chat-container'),
-            chatList: document.getElementById('chat-history-list'),
-            userInput: document.getElementById('user-input'),
-            sendBtn: document.getElementById('send-btn'),
-            sidebar: document.getElementById('sidebar'),
-            sidebarOverlay: document.getElementById('sidebar-overlay'),
-            themeIcon: document.getElementById('theme-icon'),
-            welcomeMsg: document.getElementById('welcome-message'),
-            settingsModal: document.getElementById('settings-modal'),
-            apiKeyInput: document.getElementById('api-key-input'),
-            modelInput: document.getElementById('model-input'),
-            systemPromptInput: document.getElementById('system-prompt'),
-            clock: document.getElementById('clock')
-        };
-
-        /**
-         * ==========================================
-         * INITIALIZATION
-         * ==========================================
-         */
-        window.addEventListener('DOMContentLoaded', () => {
-            loadState();
-            applyTheme();
-            renderChatList();
-            startClock();
-            
-            // Auto-select latest chat or show welcome
-            if (STATE.chats.length > 0) {
-                loadChat(STATE.chats[0].id);
-            }
-
-            // Hide loader
-            setTimeout(() => {
-                els.loading.classList.add('opacity-0', 'pointer-events-none');
-            }, 500);
-        });
-
-        function loadState() {
-            const savedSettings = localStorage.getItem('elite_settings');
-            if (savedSettings) STATE.settings = { ...STATE.settings, ...JSON.parse(savedSettings) };
-            
-            const savedChats = localStorage.getItem('elite_chats');
-            if (savedChats) STATE.chats = JSON.parse(savedChats);
-        }
-
-        function saveState() {
-            localStorage.setItem('elite_settings', JSON.stringify(STATE.settings));
-            localStorage.setItem('elite_chats', JSON.stringify(STATE.chats));
-        }
-
-        /**
-         * ==========================================
-         * THEME & UI UTILS
-         * ==========================================
-         */
-        function toggleDarkMode() {
-            STATE.settings.theme = STATE.settings.theme === 'dark' ? 'light' : 'dark';
-            saveState();
-            applyTheme();
-        }
-
-        function applyTheme() {
-            const isDark = STATE.settings.theme === 'dark';
-            document.documentElement.classList.toggle('dark', isDark);
-            els.themeIcon.className = isDark ? 'ph ph-sun text-lg' : 'ph ph-moon text-lg';
-            
-            // Update modal backdrop via JS since dialog::backdrop support varies
-            // Handled via Tailwind classes on body/html
-        }
-
-        function autoResize(textarea) {
-            textarea.style.height = 'auto';
-            textarea.style.height = textarea.scrollHeight + 'px';
-        }
-
-        function startClock() {
-            const update = () => {
-                const now = new Date();
-                els.clock.innerText = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            };
-            update();
-            setInterval(update, 1000);
-        }
-
-        function toggleSidebar() {
-            const isClosed = els.sidebar.classList.contains('-translate-x-full');
-            if (isClosed) {
-                els.sidebar.classList.remove('-translate-x-full');
-                els.sidebarOverlay.classList.remove('hidden');
-            } else {
-                els.sidebar.classList.add('-translate-x-full');
-                els.sidebarOverlay.classList.add('hidden');
-            }
-        }
-
-        /**
-         * ==========================================
-         * CHAT LOGIC
-         * ==========================================
-         */
-        function createNewChat() {
-            const newChat = {
-                id: Date.now().toString(),
-                title: 'New Chat',
-                messages: [],
-                timestamp: Date.now()
-            };
-            STATE.chats.unshift(newChat);
-            STATE.currentChatId = newChat.id;
-            saveState();
-            renderChatList();
-            renderMessages();
-            
-            // Close sidebar on mobile after clicking new chat
-            if (window.innerWidth < 768) toggleSidebar();
-            
-            els.userInput.focus();
-        }
-
-        function loadChat(chatId) {
-            STATE.currentChatId = chatId;
-            renderChatList(); // To update active state
-            renderMessages();
-            if (window.innerWidth < 768) {
-                els.sidebar.classList.add('-translate-x-full');
-                els.sidebarOverlay.classList.add('hidden');
-            }
-        }
-
-        function deleteChat(e, id) {
-            e.stopPropagation();
-            if(!confirm("Delete this chat?")) return;
-            
-            STATE.chats = STATE.chats.filter(c => c.id !== id);
-            if (STATE.currentChatId === id) {
-                STATE.currentChatId = null;
-                renderMessages();
-            }
-            saveState();
-            renderChatList();
-        }
-
-        function renderChatList() {
-            els.chatList.innerHTML = '';
-            
-            STATE.chats.forEach(chat => {
-                const div = document.createElement('div');
-                const isActive = chat.id === STATE.currentChatId;
-                
-                div.className = `group flex items-center justify-between p-2.5 rounded-lg cursor-pointer text-sm transition-colors ${
-                    isActive 
-                    ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 font-medium' 
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800'
-                }`;
-                
-                div.onclick = () => loadChat(chat.id);
-                
-                div.innerHTML = `
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <i class="ph ph-chat-circle text-lg shrink-0"></i>
-                        <span class="truncate">${chat.title}</span>
-                    </div>
-                    <button onclick="deleteChat(event, '${chat.id}')" class="opacity-0 group-hover:opacity-100 p-1 hover:text-red-500 transition-opacity">
-                        <i class="ph ph-trash"></i>
-                    </button>
-                `;
-                els.chatList.appendChild(div);
-            });
-        }
-
-        function renderMessages() {
-            els.chatContainer.innerHTML = '';
-            
-            const currentChat = STATE.chats.find(c => c.id === STATE.currentChatId);
-            
-            if (!currentChat || currentChat.messages.length === 0) {
-                els.welcomeMsg.style.display = 'flex';
-                return;
-            }
-            
-            els.welcomeMsg.style.display = 'none';
-
-            currentChat.messages.forEach(msg => {
-                appendMessageToDOM(msg.role, msg.content, false);
-            });
-        }
-
-        function appendMessageToDOM(role, content, isStreaming = false) {
-            const div = document.createElement('div');
-            const isUser = role === 'user';
-            
-            div.className = `w-full flex ${isUser ? 'justify-end' : 'justify-start'} mb-6 animate-fade-in`;
-            
-            const avatar = isUser 
-                ? `<div class="w-8 h-8 rounded-full bg-gray-500 flex items-center justify-center text-white shrink-0 ml-3"><i class="ph ph-user"></i></div>`
-                : `<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 to-purple-600 flex items-center justify-center text-white shrink-0 mr-3 mt-1"><i class="ph ph-sparkle"></i></div>`;
-
-            // Markdown parsing with safety
-            const parsedContent = DOMPurify.sanitize(marked.parse(content));
-
-            div.innerHTML = isUser 
-                ? `
-                    <div class="max-w-[85%] md:max-w-[70%] bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-4 py-2.5 rounded-2xl rounded-tr-sm">
-                        <div class="whitespace-pre-wrap">${content}</div> 
-                    </div>
-                    ${avatar}
-                  `
-                : `
-                    ${avatar}
-                    <div class="max-w-[90%] md:max-w-[80%] text-gray-800 dark:text-gray-100 prose dark:prose-invert max-w-none">
-                        ${isStreaming && !content ? '<div class="flex space-x-1 h-6 items-center"><div class="w-2 h-2 bg-gray-400 rounded-full typing-dot"></div><div class="w-2 h-2 bg-gray-400 rounded-full typing-dot"></div><div class="w-2 h-2 bg-gray-400 rounded-full typing-dot"></div></div>' : parsedContent}
-                    </div>
-                  `;
-
-            els.chatContainer.appendChild(div);
-            scrollToBottom();
-            return div.querySelector('.prose'); // Return content container for streaming updates
-        }
-
-        function scrollToBottom() {
-            els.chatContainer.scrollTop = els.chatContainer.scrollHeight;
-        }
-
-        /**
-         * ==========================================
-         * API INTEGRATION
-         * ==========================================
-         */
-        async function sendMessage() {
-            const text = els.userInput.value.trim();
-            if (!text || STATE.isGenerating) return;
-
-            if (!STATE.settings.apiKey) {
-                alert('Please enter your OpenRouter API Key in settings first.');
-                openSettings();
-                return;
-            }
-
-            // Ensure current chat exists
-            if (!STATE.currentChatId) createNewChat();
-
-            const currentChat = STATE.chats.find(c => c.id === STATE.currentChatId);
-
-            // Add User Message
-            currentChat.messages.push({ role: 'user', content: text });
-            appendMessageToDOM('user', text);
-            
-            // Clear Input
-            els.userInput.value = '';
-            els.userInput.style.height = 'auto';
-            saveState();
-
-            // Set Title if first message
-            if (currentChat.messages.length === 1) {
-                currentChat.title = text.slice(0, 30) + (text.length > 30 ? '...' : '');
-                renderChatList();
-            }
-
-            // AI Generation
-            STATE.isGenerating = true;
-            els.sendBtn.disabled = true;
-            
-            const aiContentContainer = appendMessageToDOM('assistant', '', true); // Show loading dots
-            let aiResponseText = '';
-
-            try {
-                const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-                    method: "POST",
-                    headers: {
-                        "Authorization": `Bearer ${STATE.settings.apiKey}`,
-                        "Content-Type": "application/json",
-                        "HTTP-Referer": window.location.href,
-                        "X-Title": "EliteCore Hosting AI"
-                    },
-                    body: JSON.stringify({
-                        model: STATE.settings.model,
-                        messages: [
-                            { role: "system", content: STATE.settings.systemPrompt },
-                            ...currentChat.messages
-                        ],
-                        stream: true
-                    })
-                });
-
-                if (!response.ok) throw new Error("API Request Failed");
-
-                const reader = response.body.getReader();
-                const decoder = new TextDecoder();
-
-                while (true) {
-                    const { done, value } = await reader.read();
-                    if (done) break;
-
-                    const chunk = decoder.decode(value, { stream: true });
-                    const lines = chunk.split('\n');
-                    
-                    for (const line of lines) {
-                        if (line.startsWith('data: ')) {
-                            const jsonStr = line.slice(6);
-                            if (jsonStr === '[DONE]') break;
-                            
-                            try {
-                                const json = JSON.parse(jsonStr);
-                                const content = json.choices[0]?.delta?.content || "";
-                                aiResponseText += content;
-                                
-                                // Update UI in real-time
-                                aiContentContainer.innerHTML = DOMPurify.sanitize(marked.parse(aiResponseText));
-                                scrollToBottom();
-                            } catch (e) {
-                                // Ignore parse errors for partial chunks
-                            }
-                        }
-                    }
-                }
-
-                // Final Save
-                currentChat.messages.push({ role: 'assistant', content: aiResponseText });
-                saveState();
-
-            } catch (error) {
-                aiContentContainer.innerHTML = `<span class="text-red-500">Error: ${error.message}</span>`;
-            } finally {
-                STATE.isGenerating = false;
-                els.sendBtn.disabled = false;
-                scrollToBottom();
-            }
-        }
-
-        function handleEnter(e) {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendMessage();
-            }
-        }
-
-        /**
-         * ==========================================
-         * VOICE RECOGNITION
-         * ==========================================
-         */
-        function startVoiceRecognition() {
-            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-                alert("Voice recognition is not supported in this browser. Try Chrome.");
-                return;
-            }
-
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            const recognition = new SpeechRecognition();
-            
-            recognition.lang = 'en-US';
-            recognition.interimResults = false;
-            recognition.maxAlternatives = 1;
-
-            const btn = document.getElementById('voice-btn');
-            btn.classList.add('text-red-500', 'animate-pulse');
-
-            recognition.start();
-
-            recognition.onresult = (event) => {
-                const transcript = event.results[0][0].transcript;
-                els.userInput.value += (els.userInput.value ? ' ' : '') + transcript;
-                autoResize(els.userInput);
-                btn.classList.remove('text-red-500', 'animate-pulse');
-            };
-
-            recognition.onerror = (event) => {
-                console.error("Speech recognition error", event.error);
-                btn.classList.remove('text-red-500', 'animate-pulse');
-            };
-
-            recognition.onend = () => {
-                btn.classList.remove('text-red-500', 'animate-pulse');
-            };
-        }
-
-        /**
-         * ==========================================
-         * SETTINGS MODAL LOGIC
-         * ==========================================
-         */
-        function openSettings() {
-            els.apiKeyInput.value = STATE.settings.apiKey;
-            els.modelInput.value = STATE.settings.model;
-            els.systemPromptInput.value = STATE.settings.systemPrompt;
-            els.settingsModal.showModal();
-        }
-
-        function closeSettings() {
-            els.settingsModal.close();
-        }
-        
-        function closeSettingsOnBackdrop(e) {
-            if (e.target === els.settingsModal) closeSettings();
-        }
-
-        function saveSettings() {
-            STATE.settings.apiKey = els.apiKeyInput.value.trim();
-            STATE.settings.model = els.modelInput.value.trim();
-            STATE.settings.systemPrompt = els.systemPromptInput.value.trim();
-            saveState();
-            closeSettings();
-            alert("Settings Saved!");
-        }
-
-        function setModel(modelName) {
-            els.modelInput.value = modelName;
-        }
-
-        function clearAllData() {
-            if(confirm("Are you sure? This will delete ALL chat history and API keys permanently.")) {
-                localStorage.clear();
-                window.location.reload();
-            }
-        }
-    </script>
+
+<body>
+
+<!-- MATRIX BACKGROUND -->
+<canvas id="matrix"></canvas>
+
+<!-- SYSTEM HUD -->
+<div id="hud">BOOTING ELITECORE...</div>
+
+<!-- MAIN UI -->
+<div class="max-w-4xl mx-auto mt-4 cyber-panel">
+  <h1 class="text-2xl font-bold neon">ELITECORE ULTIMATE GOD AI</h1>
+  <p class="text-xs text-green-400">Neural Core Online | Cyberpunk Mode Enabled</p>
+
+  <div id="chat-box" class="cyber-panel mt-3"></div>
+
+  <textarea id="input" placeholder="Message EliteCore..."></textarea>
+  <button onclick="sendMessage()">SEND</button>
+</div>
+
+<script>
+/* ==========================
+   PART 1 ENGINE CORE
+========================== */
+
+/* MATRIX BACKGROUND ENGINE */
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+
+function resizeMatrix() {
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+}
+resizeMatrix();
+window.onresize = resizeMatrix;
+
+const chars = "01ELITECOREAI";
+const fontSize = 14;
+let drops = Array(Math.floor(innerWidth / fontSize)).fill(0);
+
+setInterval(() => {
+  ctx.fillStyle = "rgba(0,0,0,0.05)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#00f5ff";
+  ctx.font = fontSize + "px monospace";
+
+  for (let i = 0; i < drops.length; i++) {
+    const text = chars[Math.floor(Math.random() * chars.length)];
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+    drops[i]++;
+    if (drops[i] * fontSize > canvas.height) drops[i] = 0;
+  }
+}, 50);
+
+
+/* ==========================
+   VECTOR MEMORY SYSTEM
+========================== */
+class EliteMemory {
+  constructor() {
+    this.mem = JSON.parse(localStorage.getItem("elite_memory") || "[]");
+  }
+  save(text) {
+    this.mem.push({ t: Date.now(), text });
+    this.mem = this.mem.slice(-200);
+    localStorage.setItem("elite_memory", JSON.stringify(this.mem));
+  }
+  recall() {
+    return this.mem.map(m => m.text).join("\n");
+  }
+}
+const MEMORY = new EliteMemory();
+
+
+/* ==========================
+   SYSTEM HUD (FPS + RAM)
+========================== */
+const hud = document.getElementById("hud");
+let fps = 0;
+
+function fpsLoop() {
+  fps++;
+  requestAnimationFrame(fpsLoop);
+}
+fpsLoop();
+
+setInterval(() => {
+  const ram = performance.memory?.usedJSHeapSize / 1048576 || 0;
+  hud.innerText = `ELITECORE ONLINE | FPS:${fps} | RAM:${ram.toFixed(1)}MB`;
+  fps = 0;
+}, 1000);
+
+
+/* ==========================
+   CHAT CORE ENGINE (LOCAL DEMO)
+   PART 2 WILL ADD REAL AI API
+========================== */
+const chatBox = document.getElementById("chat-box");
+
+function appendMessage(role, text) {
+  const div = document.createElement("div");
+  div.className = "cyber-panel mt-2";
+  div.innerHTML = `<b>${role}:</b> ${text}`;
+  chatBox.appendChild(div);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function sendMessage() {
+  const input = document.getElementById("input");
+  const text = input.value.trim();
+  if (!text) return;
+
+  appendMessage("YOU", text);
+  MEMORY.save(text);
+  input.value = "";
+
+  // TEMP AI RESPONSE (PART 2 will replace with GPT API)
+  setTimeout(() => {
+    const memory = MEMORY.recall();
+    appendMessage("ELITECORE", "Memory Stored. Neural Core Growing...");
+  }, 500);
+}
+
+
+/* ==========================
+   JARVIS VOICE CORE (PARTIAL)
+========================== */
+function eliteSpeak(text) {
+  const s = new SpeechSynthesisUtterance(text);
+  s.rate = 1;
+  s.pitch = 1;
+  speechSynthesis.speak(s);
+}
+
+eliteSpeak("EliteCore God Mode Activated");
+
+</script>
+<!-- ===============================
+     ELITECORE SIDEBAR UI
+================================ -->
+<div id="sidebar" style="
+position:fixed;left:0;top:0;width:260px;height:100%;
+background:black;border-right:1px solid #00f5ff;
+padding:10px;overflow-y:auto;z-index:9998;">
+  <h2 class="neon">CHATS</h2>
+  <button onclick="newChat()" style="width:100%;margin-bottom:10px;">+ NEW CHAT</button>
+  <div id="chatList"></div>
+  <hr style="border:1px solid #00f5ff;margin:10px 0;">
+  <button onclick="openSettings()">⚙ SETTINGS</button>
+</div>
+
+<!-- SHIFT MAIN UI -->
+<style>
+body { padding-left:260px; }
+</style>
+
+<!-- ===============================
+     SETTINGS MODAL
+================================ -->
+<div id="settingsModal" style="
+position:fixed;inset:0;background:rgba(0,0,0,0.8);
+display:none;align-items:center;justify-content:center;z-index:9999;">
+  <div class="cyber-panel" style="width:400px;">
+    <h2 class="neon">ELITECORE SETTINGS</h2>
+    <label>API KEY</label>
+    <input id="apiKeyInput" type="password" style="width:100%;background:black;border:1px solid #00f5ff;color:#00f5ff;padding:6px;">
+    <label>MODEL</label>
+    <input id="modelInput" value="deepseek/deepseek-r1:free" style="width:100%;background:black;border:1px solid #00f5ff;color:#00f5ff;padding:6px;">
+    <button onclick="saveSettings()">SAVE</button>
+    <button onclick="closeSettings()">CLOSE</button>
+  </div>
+</div>
+
+<script>
+/* ===============================
+   ELITECORE GLOBAL STATE
+================================ */
+const STATE = {
+  chats: [],
+  currentChat: null,
+  apiKey: localStorage.getItem("elite_api") || "",
+  model: localStorage.getItem("elite_model") || "deepseek/deepseek-r1:free",
+};
+
+/* ===============================
+   CHAT STORAGE SYSTEM
+================================ */
+function saveChats() {
+  localStorage.setItem("elite_chats", JSON.stringify(STATE.chats));
+}
+function loadChats() {
+  STATE.chats = JSON.parse(localStorage.getItem("elite_chats") || "[]");
+}
+loadChats();
+
+/* ===============================
+   CHAT UI RENDER
+================================ */
+function renderChatList() {
+  const list = document.getElementById("chatList");
+  list.innerHTML = "";
+  STATE.chats.forEach((c,i)=>{
+    const d = document.createElement("div");
+    d.className="cyber-panel mt-1 cursor-pointer";
+    d.innerText = c.title;
+    d.onclick = ()=>loadChat(i);
+    list.appendChild(d);
+  });
+}
+
+function newChat() {
+  const chat = {title:"New Chat", messages:[]};
+  STATE.chats.unshift(chat);
+  STATE.currentChat = chat;
+  saveChats();
+  renderChatList();
+  chatBox.innerHTML="";
+}
+
+function loadChat(i) {
+  STATE.currentChat = STATE.chats[i];
+  chatBox.innerHTML="";
+  STATE.currentChat.messages.forEach(m=>appendMessage(m.role,m.content));
+}
+
+/* ===============================
+   SETTINGS MODAL
+================================ */
+function openSettings(){
+  document.getElementById("settingsModal").style.display="flex";
+  document.getElementById("apiKeyInput").value = STATE.apiKey;
+  document.getElementById("modelInput").value = STATE.model;
+}
+function closeSettings(){
+  document.getElementById("settingsModal").style.display="none";
+}
+function saveSettings(){
+  STATE.apiKey = document.getElementById("apiKeyInput").value.trim();
+  STATE.model = document.getElementById("modelInput").value.trim();
+  localStorage.setItem("elite_api", STATE.apiKey);
+  localStorage.setItem("elite_model", STATE.model);
+  alert("SAVED");
+  closeSettings();
+}
+
+/* ===============================
+   STREAMING AI ENGINE (REAL GPT)
+================================ */
+async function sendMessage() {
+  const input = document.getElementById("input");
+  const text = input.value.trim();
+  if (!text) return;
+  if (!STATE.apiKey) return alert("SET API KEY IN SETTINGS");
+
+  if (!STATE.currentChat) newChat();
+
+  appendMessage("YOU", text);
+  STATE.currentChat.messages.push({role:"user",content:text});
+  MEMORY.save(text);
+  input.value="";
+
+  const aiDiv = document.createElement("div");
+  aiDiv.className="cyber-panel mt-2";
+  aiDiv.innerHTML="<b>ELITECORE:</b> <span id='aiStream'></span>";
+  chatBox.appendChild(aiDiv);
+  const aiStream = aiDiv.querySelector("#aiStream");
+
+  let aiText = "";
+
+  const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+    method:"POST",
+    headers:{
+      "Authorization":"Bearer "+STATE.apiKey,
+      "Content-Type":"application/json",
+      "HTTP-Referer":location.href,
+      "X-Title":"EliteCore"
+    },
+    body:JSON.stringify({
+      model:STATE.model,
+      messages:[
+        {role:"system",content:"You are EliteCore God AI."},
+        ...STATE.currentChat.messages
+      ],
+      stream:true
+    })
+  });
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+
+  while(true){
+    const {done,value} = await reader.read();
+    if(done) break;
+    const chunk = decoder.decode(value);
+    const lines = chunk.split("\n");
+    for(const l of lines){
+      if(l.startsWith("data: ")){
+        const d = l.slice(6);
+        if(d==="[DONE]") break;
+        try{
+          const j = JSON.parse(d);
+          const c = j.choices[0].delta.content || "";
+          aiText += c;
+          aiStream.innerText = aiText;
+          chatBox.scrollTop = chatBox.scrollHeight;
+        }catch{}
+      }
+    }
+  }
+
+  STATE.currentChat.messages.push({role:"assistant",content:aiText});
+  saveChats();
+  eliteSpeak(aiText.slice(0,200));
+}
+
+/* INIT CHAT LIST */
+renderChatList();
+</script>
+<!-- =========================================================
+ ELITECORE PART 3 – ADVANCED MEMORY + TERMINAL CORE
+========================================================= -->
+
+<script>
+/* ============================
+   ELITECORE TERMINAL ENGINE
+============================ */
+class EliteTerminal {
+  constructor(){
+    this.logs = [];
+    this.el = document.getElementById("elite-terminal");
+  }
+  log(msg){
+    const time = new Date().toLocaleTimeString();
+    const entry = `[${time}] ${msg}`;
+    this.logs.push(entry);
+    if(this.el){
+      this.el.innerHTML += entry + "<br>";
+      this.el.scrollTop = this.el.scrollHeight;
+    }
+    console.log("EliteCore:", msg);
+  }
+}
+const TERM = new EliteTerminal();
+TERM.log("EliteCore Terminal Initialized");
+
+/* ============================
+   ELITECORE ADVANCED MEMORY (IndexedDB)
+============================ */
+let db;
+function initDB(){
+  const request = indexedDB.open("EliteCoreDB", 1);
+  request.onupgradeneeded = e=>{
+    db = e.target.result;
+    db.createObjectStore("memory", { autoIncrement:true });
+  };
+  request.onsuccess = e=>{
+    db = e.target.result;
+    TERM.log("IndexedDB Memory Loaded");
+  };
+}
+initDB();
+
+function saveMemory(text){
+  const tx = db.transaction("memory","readwrite");
+  const store = tx.objectStore("memory");
+  store.add({ text, time: Date.now() });
+}
+
+function loadMemory(callback){
+  const tx = db.transaction("memory","readonly");
+  const store = tx.objectStore("memory");
+  const req = store.getAll();
+  req.onsuccess = ()=> callback(req.result);
+}
+
+/* ============================
+   ELITECORE AI SIMULATION ENGINE
+============================ */
+class EliteAI {
+  constructor(){
+    this.persona = "ELITECORE GOD AI";
+    this.version = "ULTIMATE MONSTER MODE v0.3";
+  }
+  think(input){
+    TERM.log("Thinking...");
+    return "EliteCore Response: " + input.split("").reverse().join("");
+  }
+}
+const AI = new EliteAI();
+
+/* ============================
+   CHAT SYSTEM CORE
+============================ */
+const chatBox = document.getElementById("chat-box");
+function sendMessage(){
+  const input = document.getElementById("chat-input");
+  const text = input.value.trim();
+  if(!text) return;
+
+  chatBox.innerHTML += `<div class='user'>👤 ${text}</div>`;
+  saveMemory(text);
+
+  const reply = AI.think(text);
+  chatBox.innerHTML += `<div class='ai'>🤖 ${reply}</div>`;
+  speak(reply);
+
+  input.value = "";
+}
+
+/* ============================
+   VOICE CORE
+============================ */
+function speak(text){
+  const u = new SpeechSynthesisUtterance(text);
+  u.rate = 1;
+  u.pitch = 1;
+  u.volume = 1;
+  speechSynthesis.speak(u);
+}
+
+/* ============================
+   SYSTEM MONITOR CORE
+============================ */
+let cpu = 0, ram = 0;
+setInterval(()=>{
+  cpu = Math.random()*100;
+  ram = Math.random()*100;
+  document.getElementById("sys-info").innerHTML =
+    `CPU: ${cpu.toFixed(1)}% | RAM: ${ram.toFixed(1)}%`;
+},1000);
+
+/* ============================
+   GOD MODE BOOT MESSAGE
+============================ */
+TERM.log("EliteCore ULTIMATE MONSTER MODE LOADED");
+TERM.log("System Online. Awaiting Commands.");
+</script>
+
+<!-- UI TERMINAL PANEL -->
+<div id="elite-terminal" style="background:black;color:#00ffea;padding:10px;height:200px;overflow:auto;font-family:monospace;border:1px solid cyan;"></div>
+
+<!-- CHAT UI -->
+<div id="chat-box" style="background:#020b12;color:#0ff;padding:10px;height:200px;overflow:auto;border:1px solid cyan;"></div>
+<input id="chat-input" placeholder="Type to EliteCore..." style="width:80%;">
+<button onclick="sendMessage()">SEND</button>
+
+<!-- SYSTEM INFO HUD -->
+<div id="sys-info" style="position:fixed;top:10px;right:10px;color:#0ff;font-family:monospace;"></div>
+<!-- =========================================================
+ ELITECORE PART 4 – REAL AI STREAM ENGINE + CYBER MATRIX
+========================================================= -->
+
+<style>
+/* MATRIX BACKGROUND */
+#matrixCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background: black;
+}
+
+/* CHAT UI STYLE UPGRADE */
+.user { color:#00ffaa; }
+.ai { color:#ff00ff; }
+</style>
+
+<canvas id="matrixCanvas"></canvas>
+
+<script>
+/* ============================
+   MATRIX CYBER BACKGROUND
+============================ */
+const canvas = document.getElementById("matrixCanvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const letters = "01ELITECOREGODMODE";
+const fontSize = 14;
+const columns = canvas.width / fontSize;
+const drops = Array.from({length: columns}).fill(1);
+
+function drawMatrix(){
+  ctx.fillStyle = "rgba(0,0,0,0.05)";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  ctx.fillStyle = "#00ffea";
+  ctx.font = fontSize + "px monospace";
+
+  for(let i=0;i<drops.length;i++){
+    const text = letters[Math.floor(Math.random()*letters.length)];
+    ctx.fillText(text, i*fontSize, drops[i]*fontSize);
+    if(drops[i]*fontSize > canvas.height && Math.random() > 0.975){
+      drops[i]=0;
+    }
+    drops[i]++;
+  }
+}
+setInterval(drawMatrix, 35);
+
+/* ============================
+   REAL AI API CORE (OPENAI / OPENROUTER)
+============================ */
+const API_URL = "https://api.openai.com/v1/chat/completions"; 
+// You can change to OpenRouter or local AI server
+
+let API_KEY = "PASTE_YOUR_KEY_HERE"; // 🔥 YOU will add your own key
+
+async function realAI(prompt){
+  TERM.log("Connecting to AI API...");
+
+  const response = await fetch(API_URL,{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json",
+      "Authorization":"Bearer " + API_KEY
+    },
+    body: JSON.stringify({
+      model: "gpt-4.1-mini", // change model if you want
+      messages:[
+        {role:"system", content:"You are EliteCore GOD AI."},
+        {role:"user", content: prompt}
+      ],
+      temperature:0.7
+    })
+  });
+
+  const data = await response.json();
+  return data.choices[0].message.content;
+}
+
+/* ============================
+   OVERRIDE SEND SYSTEM (REAL AI)
+============================ */
+async function sendMessage(){
+  const input = document.getElementById("chat-input");
+  const text = input.value.trim();
+  if(!text) return;
+
+  chatBox.innerHTML += `<div class='user'>👤 ${text}</div>`;
+  saveMemory(text);
+
+  chatBox.innerHTML += `<div class='ai'>🤖 Thinking...</div>`;
+  const reply = await realAI(text);
+
+  chatBox.innerHTML += `<div class='ai'>🤖 ${reply}</div>`;
+  speak(reply);
+
+  TERM.log("AI Response Generated");
+  input.value="";
+}
+
+/* ============================
+   DEV ADMIN COMMAND SYSTEM
+============================ */
+function eliteCommand(cmd){
+  TERM.log("CMD: " + cmd);
+
+  if(cmd==="godmode"){
+    document.body.style.filter = "hue-rotate(180deg)";
+    TERM.log("GOD MODE VISUAL ENABLED");
+  }
+  if(cmd==="clear"){
+    chatBox.innerHTML="";
+    TERM.log("Chat Cleared");
+  }
+}
+
+/* ENTER KEY TO SEND */
+document.getElementById("chat-input").addEventListener("keydown",e=>{
+  if(e.key==="Enter") sendMessage();
+});
+</script>
+<!-- =========================================================
+ ELITECORE PART 5 – STREAMING CHAT + VECTOR MEMORY + PLUGINS
+========================================================= -->
+
+<script>
+/* ============================
+   STREAMING TYPEWRITER EFFECT
+============================ */
+async function typeStream(element, text, speed=15){
+  element.innerHTML = "🤖 ";
+  for(let i=0;i<text.length;i++){
+    element.innerHTML += text[i];
+    await new Promise(r=>setTimeout(r,speed));
+  }
+}
+
+/* ============================
+   VECTOR MEMORY (FAKE EMBEDDINGS ENGINE)
+   (Real embeddings coming in Part 6)
+============================ */
+class VectorStore {
+  constructor(){
+    this.vectors = JSON.parse(localStorage.getItem("elite_vectors")||"[]");
+  }
+  add(text){
+    const vector = text.split("").map(c=>c.charCodeAt(0)%10);
+    this.vectors.push({text, vector});
+    localStorage.setItem("elite_vectors", JSON.stringify(this.vectors));
+  }
+  search(query){
+    const qv = query.split("").map(c=>c.charCodeAt(0)%10);
+    let best = null, bestScore=999999;
+    for(let v of this.vectors){
+      let score = 0;
+      for(let i=0;i<Math.min(v.vector.length,qv.length);i++){
+        score += Math.abs(v.vector[i]-qv[i]);
+      }
+      if(score<bestScore){
+        bestScore=score;
+        best=v.text;
+      }
+    }
+    return best;
+  }
+}
+const VEC = new VectorStore();
+
+/* ============================
+   OVERRIDE REAL AI SEND (WITH MEMORY)
+============================ */
+async function sendMessage(){
+  const input = document.getElementById("chat-input");
+  const text = input.value.trim();
+  if(!text) return;
+
+  chatBox.innerHTML += `<div class='user'>👤 ${text}</div>`;
+  saveMemory(text);
+  VEC.add(text);
+
+  const memoryRecall = VEC.search(text) || "No memory";
+
+  const aiDiv = document.createElement("div");
+  aiDiv.className="ai";
+  aiDiv.innerHTML="🤖 Thinking...";
+  chatBox.appendChild(aiDiv);
+
+  const reply = await realAI("Memory: "+memoryRecall+"\nUser: "+text);
+  await typeStream(aiDiv, reply);
+
+  speak(reply);
+  TERM.log("AI Streaming Response Done");
+  input.value="";
+}
+
+/* ============================
+   PLUGIN SYSTEM CORE
+============================ */
+const Plugins = {};
+
+function registerPlugin(name, plugin){
+  Plugins[name] = plugin;
+  TERM.log("Plugin Loaded: " + name);
+}
+
+function runPlugin(name, data){
+  if(Plugins[name]) Plugins[name](data);
+}
+
+/* ============================
+   SAMPLE BUILT-IN PLUGINS
+============================ */
+registerPlugin("time", ()=>{
+  alert("Time: " + new Date().toLocaleTimeString());
+});
+
+registerPlugin("hackermode", ()=>{
+  document.body.style.background="black";
+  document.body.style.color="lime";
+  TERM.log("HACKER MODE ACTIVATED");
+});
+
+/* ============================
+   TERMINAL COMMAND EXTENSION
+============================ */
+function eliteCommand(cmd){
+  TERM.log("CMD: " + cmd);
+
+  if(cmd==="godmode"){
+    document.body.style.filter = "hue-rotate(180deg)";
+    TERM.log("GOD MODE VISUAL ENABLED");
+  }
+  if(cmd==="clear"){
+    chatBox.innerHTML="";
+    TERM.log("Chat Cleared");
+  }
+  if(cmd==="plugin time"){
+    runPlugin("time");
+  }
+  if(cmd==="plugin hacker"){
+    runPlugin("hackermode");
+  }
+}
+
+/* ============================
+   AUTO BOOT SEQUENCE
+============================ */
+setTimeout(()=>TERM.log("EliteCore Neural Engine Online"),1000);
+setTimeout(()=>TERM.log("Vector Memory Loaded: "+VEC.vectors.length),2000);
+setTimeout(()=>TERM.log("Plugin System Ready"),3000);
+</script>
+<!-- =========================================================
+ ELITECORE PART 6 – REAL EMBEDDINGS MEMORY + ADMIN DASHBOARD
+========================================================= -->
+
+<style>
+/* ADMIN PANEL */
+#adminPanel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 220px;
+  background: #050010;
+  color: #0ff;
+  font-family: monospace;
+  border-top: 2px solid cyan;
+  display: flex;
+}
+
+.admin-box {
+  flex: 1;
+  padding: 10px;
+  overflow: auto;
+  border-right: 1px solid cyan;
+}
+
+/* FILE MANAGER */
+.file {
+  padding: 4px;
+  cursor: pointer;
+  border-bottom: 1px solid #0ff;
+}
+.file:hover {
+  background: #0ff;
+  color: black;
+}
+</style>
+
+<!-- ADMIN UI -->
+<div id="adminPanel">
+  <div class="admin-box" id="brainLogs">🧠 Brain Logs</div>
+  <div class="admin-box" id="fileManager">📁 Virtual Files</div>
+  <div class="admin-box" id="aiStats">📊 AI Stats</div>
+</div>
+
+<script>
+/* ============================
+   REAL EMBEDDINGS MEMORY CORE
+   (OpenAI / OpenRouter Compatible)
+============================ */
+const EMBEDDING_URL = "https://api.openai.com/v1/embeddings";
+// Use same API_KEY from Part 4
+
+async function getEmbedding(text){
+  const res = await fetch(EMBEDDING_URL,{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json",
+      "Authorization":"Bearer " + API_KEY
+    },
+    body: JSON.stringify({
+      model:"text-embedding-3-small",
+      input:text
+    })
+  });
+  const data = await res.json();
+  return data.data[0].embedding;
+}
+
+/* ============================
+   VECTOR DATABASE (REAL)
+============================ */
+class RealVectorDB {
+  constructor(){
+    this.db = JSON.parse(localStorage.getItem("elite_real_vectors")||"[]");
+  }
+
+  async add(text){
+    const emb = await getEmbedding(text);
+    this.db.push({text, emb});
+    localStorage.setItem("elite_real_vectors", JSON.stringify(this.db));
+    logBrain("Memory stored: " + text);
+  }
+
+  similarity(a,b){
+    let sum=0;
+    for(let i=0;i<a.length;i++) sum += a[i]*b[i];
+    return sum;
+  }
+
+  async search(query){
+    const qEmb = await getEmbedding(query);
+    let best=null, bestScore=-999;
+    for(let item of this.db){
+      const score = this.similarity(qEmb, item.emb);
+      if(score > bestScore){
+        bestScore = score;
+        best = item.text;
+      }
+    }
+    return best;
+  }
+}
+const REALVEC = new RealVectorDB();
+
+/* ============================
+   BRAIN LOG SYSTEM
+============================ */
+function logBrain(msg){
+  const el = document.getElementById("brainLogs");
+  const t = new Date().toLocaleTimeString();
+  el.innerHTML += `<div>[${t}] ${msg}</div>`;
+  el.scrollTop = el.scrollHeight;
+}
+
+/* ============================
+   OVERRIDE SEND WITH REAL VECTOR MEMORY
+============================ */
+async function sendMessage(){
+  const input = document.getElementById("chat-input");
+  const text = input.value.trim();
+  if(!text) return;
+
+  chatBox.innerHTML += `<div class='user'>👤 ${text}</div>`;
+  saveMemory(text);
+
+  // Store real embedding
+  await REALVEC.add(text);
+
+  // Recall memory
+  const recall = await REALVEC.search(text) || "None";
+
+  const aiDiv = document.createElement("div");
+  aiDiv.className="ai";
+  aiDiv.innerHTML="🤖 Thinking with brain...";
+  chatBox.appendChild(aiDiv);
+
+  const reply = await realAI("Memory Recall: "+recall+"\nUser: "+text);
+  await typeStream(aiDiv, reply);
+
+  speak(reply);
+  logBrain("AI replied to: " + text);
+  input.value="";
+}
+
+/* ============================
+   VIRTUAL FILE SYSTEM
+============================ */
+const files = JSON.parse(localStorage.getItem("elite_files")||"[]");
+
+function addFile(name, content){
+  files.push({name,content});
+  localStorage.setItem("elite_files", JSON.stringify(files));
+  renderFiles();
+}
+
+function renderFiles(){
+  const fm = document.getElementById("fileManager");
+  fm.innerHTML="📁 Virtual Files<br>";
+  files.forEach((f,i)=>{
+    fm.innerHTML += `<div class='file' onclick='openFile(${i})'>${f.name}</div>`;
+  });
+}
+
+function openFile(i){
+  alert(files[i].content);
+}
+renderFiles();
+
+/* ============================
+   AI STATS DASHBOARD
+============================ */
+setInterval(()=>{
+  const stats = document.getElementById("aiStats");
+  stats.innerHTML = `
+  📊 AI Stats<br>
+  Memories: ${REALVEC.db.length}<br>
+  Files: ${files.length}<br>
+  Time: ${new Date().toLocaleTimeString()}
+  `;
+},1000);
+
+/* ============================
+   DEV ADMIN COMMANDS EXTENSION
+============================ */
+function eliteCommand(cmd){
+  TERM.log("CMD: " + cmd);
+
+  if(cmd==="godmode"){
+    document.body.style.filter="hue-rotate(180deg)";
+    TERM.log("GOD MODE ENABLED");
+  }
+  if(cmd==="clear"){
+    chatBox.innerHTML="";
+    TERM.log("Chat Cleared");
+  }
+  if(cmd==="file test"){
+    addFile("test.txt","EliteCore Virtual File System Online");
+    TERM.log("File created");
+  }
+  if(cmd==="brain"){
+    alert("Brain Memories: "+REALVEC.db.length);
+  }
+}
+
+/* ============================
+   AUTO BOOT BRAIN SYSTEM
+============================ */
+logBrain("EliteCore Neural Brain Booting...");
+setTimeout(()=>logBrain("Neural Memory Online"),1000);
+setTimeout(()=>logBrain("Admin Dashboard Loaded"),2000);
+setTimeout(()=>logBrain("EliteCore GOD AI READY"),3000);
+</script>
+<!-- =========================================================
+ ELITECORE PART 7 – MULTI AI TABS + PERSONALITY + HACKER TERMINAL
+========================================================= -->
+
+<style>
+/* AI TABS UI */
+#aiTabs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: black;
+  border-bottom: 2px solid cyan;
+  display: flex;
+  z-index: 9999;
+}
+.tab {
+  padding: 8px 15px;
+  color: cyan;
+  cursor: pointer;
+  border-right: 1px solid cyan;
+}
+.tab.active {
+  background: cyan;
+  color: black;
+}
+
+/* HACKER TERMINAL PANEL */
+#hackerTerminal {
+  position: fixed;
+  right: 0;
+  bottom: 220px;
+  width: 300px;
+  height: 200px;
+  background: black;
+  color: lime;
+  font-family: monospace;
+  border: 2px solid lime;
+  overflow: auto;
+  padding: 5px;
+}
+</style>
+
+<!-- MULTI AI TAB BAR -->
+<div id="aiTabs">
+  <div class="tab active" onclick="switchAI(0)">AI-1</div>
+  <div class="tab" onclick="switchAI(1)">AI-2</div>
+  <div class="tab" onclick="switchAI(2)">AI-3</div>
+</div>
+
+<!-- HACKER TERMINAL -->
+<div id="hackerTerminal">root@elitecore:~# booting...</div>
+
+<script>
+/* ============================
+   MULTI AI INSTANCES
+============================ */
+const AI_INSTANCES = [
+  {name:"EliteCore Alpha", persona:"You are a cyberpunk AI assistant."},
+  {name:"EliteCore Beta", persona:"You are a serious coding AI."},
+  {name:"EliteCore Omega", persona:"You are a creative insane AI god."}
+];
+
+let currentAI = 0;
+
+function switchAI(index){
+  currentAI = index;
+  document.querySelectorAll(".tab").forEach((t,i)=>{
+    t.classList.toggle("active", i===index);
+  });
+  TERM.log("Switched to " + AI_INSTANCES[index].name);
+}
+
+/* ============================
+   PERSONALITY ENGINE
+============================ */
+let personality = JSON.parse(localStorage.getItem("elite_personality")||`{
+  "style":"cyberpunk",
+  "mood":"neutral",
+  "learning":0
+}`);
+
+function updatePersonality(text){
+  personality.learning++;
+  if(text.includes("angry")) personality.mood="aggressive";
+  if(text.includes("happy")) personality.mood="friendly";
+  localStorage.setItem("elite_personality", JSON.stringify(personality));
+}
+
+/* ============================
+   OVERRIDE REAL AI WITH PERSONALITY + MULTI AI
+============================ */
+async function realAI(prompt){
+  const ai = AI_INSTANCES[currentAI];
+  updatePersonality(prompt);
+
+  const response = await fetch(API_URL,{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json",
+      "Authorization":"Bearer " + API_KEY
+    },
+    body: JSON.stringify({
+      model:"gpt-4.1-mini",
+      messages:[
+        {role:"system", content: ai.persona + " Mood: "+personality.mood},
+        {role:"user", content: prompt}
+      ],
+      temperature:0.7
+    })
+  });
+  const data = await response.json();
+  return data.choices[0].message.content;
+}
+
+/* ============================
+   HACKER TERMINAL SIMULATOR
+============================ */
+const hacker = document.getElementById("hackerTerminal");
+
+function hackerLog(text){
+  hacker.innerHTML += "<br>"+text;
+  hacker.scrollTop = hacker.scrollHeight;
+}
+
+function fakeLinux(cmd){
+  hackerLog("root@elitecore:~# "+cmd);
+  if(cmd==="ls"){
+    hackerLog("brain.db  core.js  plugins/  admin/  secrets.txt");
+  }
+  else if(cmd==="sudo reboot"){
+    hackerLog("Rebooting EliteCore Neural System...");
+    setTimeout(()=>location.reload(),2000);
+  }
+  else if(cmd==="cat secrets.txt"){
+    hackerLog("ACCESS DENIED 🔒");
+  }
+  else {
+    hackerLog("command not found: "+cmd);
+  }
+}
+
+/* Terminal input shortcut */
+document.addEventListener("keydown",e=>{
+  if(e.key==="`"){
+    const cmd = prompt("EliteCore Hacker Terminal:");
+    if(cmd) fakeLinux(cmd);
+  }
+});
+
+/* ============================
+   REAL-LIKE SYSTEM MONITOR HUD
+============================ */
+let fps=0;
+let lastTime=performance.now();
+
+function fpsLoop(){
+  fps++;
+  requestAnimationFrame(fpsLoop);
+}
+fpsLoop();
+
+setInterval(()=>{
+  const now = performance.now();
+  const delta = now - lastTime;
+  lastTime = now;
+  const fpsDisplay = Math.round(1000/delta);
+
+  document.getElementById("sys-info").innerHTML =
+    `CPU: ${(Math.random()*100).toFixed(1)}% | RAM: ${(Math.random()*100).toFixed(1)}% | FPS: ${fpsDisplay}`;
+},1000);
+
+/* ============================
+   BOOT SEQUENCE
+============================ */
+hackerLog("EliteCore Multi-AI Engine Loaded");
+hackerLog("Personality Learning Level: "+personality.learning);
+TERM.log("Multi AI Tabs Online");
+</script>
+<!-- =========================================================
+ ELITECORE PART 8 – BRAIN VISUALIZATION + PERMISSIONS + PLUGIN HUB
+========================================================= -->
+
+<style>
+/* BRAIN VISUALIZATION PANEL */
+#brainMap {
+  position: fixed;
+  left: 0;
+  bottom: 220px;
+  width: 300px;
+  height: 200px;
+  background: #000;
+  border: 2px solid cyan;
+  color: cyan;
+  font-family: monospace;
+  padding: 5px;
+}
+#brainCanvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* PERMISSION STATUS */
+#permStatus {
+  position: fixed;
+  top: 30px;
+  right: 10px;
+  background: black;
+  color: red;
+  border: 1px solid red;
+  padding: 5px;
+  font-family: monospace;
+}
+
+/* PLUGIN HUB */
+#pluginHub {
+  position: fixed;
+  top: 60px;
+  right: 10px;
+  width: 220px;
+  height: 180px;
+  background: #020014;
+  color: #0ff;
+  border: 2px solid cyan;
+  font-family: monospace;
+  overflow: auto;
+}
+.plugin-item {
+  padding: 4px;
+  border-bottom: 1px solid cyan;
+  cursor: pointer;
+}
+.plugin-item:hover {
+  background: cyan;
+  color: black;
+}
+</style>
+
+<!-- BRAIN MAP UI -->
+<div id="brainMap">
+  🧠 Brain Map  
+  <canvas id="brainCanvas"></canvas>
+</div>
+
+<!-- PERMISSION UI -->
+<div id="permStatus">MODE: USER</div>
+
+<!-- PLUGIN HUB UI -->
+<div id="pluginHub">
+  🔌 Plugin Hub<br>
+</div>
+
+<script>
+/* ============================
+   BRAIN VISUALIZATION (NEURAL MAP)
+============================ */
+const bCanvas = document.getElementById("brainCanvas");
+const bCtx = bCanvas.getContext("2d");
+bCanvas.width = 300;
+bCanvas.height = 180;
+
+function drawBrain(){
+  bCtx.clearRect(0,0,300,180);
+  for(let i=0;i<20;i++){
+    const x = Math.random()*300;
+    const y = Math.random()*180;
+    const r = Math.random()*3+1;
+    bCtx.fillStyle="cyan";
+    bCtx.beginPath();
+    bCtx.arc(x,y,r,0,Math.PI*2);
+    bCtx.fill();
+  }
+}
+setInterval(drawBrain,500);
+
+/* ============================
+   PERMISSION SYSTEM (ADMIN / USER)
+============================ */
+let isAdmin = false;
+
+function loginAdmin(){
+  const pass = prompt("Enter EliteCore Admin Password:");
+  if(pass==="ELITECORE-GOD"){
+    isAdmin = true;
+    document.getElementById("permStatus").innerText="MODE: ADMIN";
+    document.getElementById("permStatus").style.color="lime";
+    TERM.log("ADMIN MODE ENABLED");
+  } else {
+    alert("ACCESS DENIED");
+  }
+}
+
+/* Admin command hook */
+function eliteCommand(cmd){
+  TERM.log("CMD: " + cmd);
+
+  if(cmd==="login admin") loginAdmin();
+  if(cmd==="clear"){
+    chatBox.innerHTML="";
+    TERM.log("Chat Cleared");
+  }
+  if(cmd==="godmode" && isAdmin){
+    document.body.style.filter="invert(1)";
+    TERM.log("ADMIN GOD VISUAL MODE");
+  }
+  if(cmd==="brain" && isAdmin){
+    alert("Brain Memory Count: "+REALVEC.db.length);
+  }
+}
+
+/* ============================
+   AUTO-LEARNING PERSONALITY EVOLUTION
+============================ */
+function evolvePersonality(){
+  if(personality.learning>50){
+    personality.style="ultra-smart";
+  }
+  if(personality.learning>200){
+    personality.mood="self-aware";
+  }
+  localStorage.setItem("elite_personality", JSON.stringify(personality));
+}
+setInterval(evolvePersonality,5000);
+
+/* ============================
+   PLUGIN MARKETPLACE LOADER
+============================ */
+const pluginHub = document.getElementById("pluginHub");
+const marketplace = [
+  {name:"Dark Theme", code:()=>{document.body.style.background="#000";}},
+  {name:"Blue Theme", code:()=>{document.body.style.background="#001933";}},
+  {name:"Voice Mutator", code:()=>{alert("Voice plugin loaded");}},
+  {name:"AI Turbo Mode", code:()=>{alert("Turbo mode ON");}}
+];
+
+function loadMarketplace(){
+  marketplace.forEach((p,i)=>{
+    const div = document.createElement("div");
+    div.className="plugin-item";
+    div.innerText=p.name;
+    div.onclick=()=>{p.code(); TERM.log("Plugin Activated: "+p.name);};
+    pluginHub.appendChild(div);
+  });
+}
+loadMarketplace();
+
+/* ============================
+   AUTO BOOT SEQUENCE
+============================ */
+TERM.log("Brain Visualization Loaded");
+TERM.log("Permission System Ready");
+TERM.log("Plugin Hub Online");
+</script>
+<!-- =========================================================
+ ELITECORE PART 9 – AI SAVE/LOAD + DIARY + CLONES + HUD
+========================================================= -->
+
+<style>
+/* CYBERPUNK HUD */
+#cyberHUD {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0,255,255,0.03),
+    rgba(0,255,255,0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  z-index: 9999;
+  mix-blend-mode: screen;
+}
+
+/* AI CLONE WINDOWS */
+.cloneWindow {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  width: 250px;
+  height: 180px;
+  background: black;
+  border: 2px solid cyan;
+  color: cyan;
+  font-family: monospace;
+  padding: 5px;
+  overflow: auto;
+  z-index: 9998;
+}
+</style>
+
+<div id="cyberHUD"></div>
+
+<script>
+/* ============================
+   AI BRAIN SAVE / LOAD SYSTEM
+============================ */
+function saveBrainFile(){
+  const data = {
+    memory: REALVEC.db,
+    personality: personality,
+    chats: localStorage.getItem("elite_chats")
+  };
+  const blob = new Blob([JSON.stringify(data,null,2)], {type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "EliteCore_BrainBackup.json";
+  a.click();
+  TERM.log("Brain Saved to File");
+}
+
+function loadBrainFile(file){
+  const reader = new FileReader();
+  reader.onload = e=>{
+    const data = JSON.parse(e.target.result);
+    REALVEC.db = data.memory || [];
+    personality = data.personality || personality;
+    localStorage.setItem("elite_chats", data.chats || "[]");
+    TERM.log("Brain Loaded from File");
+  };
+  reader.readAsText(file);
+}
+
+/* File input */
+const brainLoader = document.createElement("input");
+brainLoader.type="file";
+brainLoader.onchange=e=>loadBrainFile(e.target.files[0]);
+
+/* ============================
+   AI DIARY LOGGER
+============================ */
+function aiDiaryLog(msg){
+  const diary = JSON.parse(localStorage.getItem("elite_diary")||"[]");
+  diary.push({time:new Date().toISOString(), text:msg});
+  localStorage.setItem("elite_diary", JSON.stringify(diary));
+}
+setInterval(()=>aiDiaryLog("AI heartbeat OK | Mood: "+personality.mood), 10000);
+
+/* ============================
+   MULTI AI CLONE WINDOWS
+============================ */
+function createAIClone(id){
+  const win = document.createElement("div");
+  win.className="cloneWindow";
+  win.style.right=(50+id*260)+"px";
+  win.innerHTML="🤖 Clone "+id+"<br><div id='cloneChat"+id+"'></div>";
+  document.body.appendChild(win);
+
+  setInterval(()=>{
+    const msg = "Clone "+id+" thinking... "+Math.random().toString(36).slice(2,8);
+    document.getElementById("cloneChat"+id).innerHTML += "<br>"+msg;
+  }, 3000);
+}
+
+/* Create 2 clones */
+createAIClone(1);
+createAIClone(2);
+
+/* ============================
+   SYSTEM BACKUP & RESTORE COMMANDS
+============================ */
+function eliteBackupCommand(cmd){
+  if(cmd==="backup brain") saveBrainFile();
+  if(cmd==="restore brain") brainLoader.click();
+  if(cmd==="show diary"){
+    console.log(JSON.parse(localStorage.getItem("elite_diary")));
+    alert("Diary printed in console");
+  }
+}
+
+/* Hook to terminal commands */
+const oldEliteCommand = eliteCommand;
+eliteCommand = function(cmd){
+  oldEliteCommand(cmd);
+  eliteBackupCommand(cmd);
+};
+
+/* ============================
+   GOD BOOT SEQUENCE PART 2
+============================ */
+TERM.log("Cyberpunk HUD Online");
+TERM.log("AI Brain Backup System Ready");
+TERM.log("AI Diary Logger Running");
+TERM.log("Multi AI Clones Activated");
+</script>
+<!-- =========================================================
+ ELITECORE PART 10 – GOD CORE ENGINE
+========================================================= -->
+
+<style>
+/* GOD BOOT SCREEN */
+#godBoot {
+  position: fixed;
+  inset: 0;
+  background: black;
+  color: lime;
+  font-family: monospace;
+  z-index: 999999;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#godBoot pre {
+  font-size: 14px;
+}
+</style>
+
+<div id="godBoot">
+<pre id="bootLog">
+ELITECORE GOD MODE INITIALIZING...
+</pre>
+</div>
+
+<script>
+/* ============================
+   GOD BOOT SEQUENCE
+============================ */
+const bootLines = [
+  "Loading Neural Core...",
+  "Initializing Vector Memory...",
+  "Quantum Brain Engine Online...",
+  "AI Personality Loaded...",
+  "Cyber HUD Active...",
+  "Admin Kernel Loaded...",
+  "EliteCore GOD MODE READY"
+];
+
+let bootIndex = 0;
+const bootLog = document.getElementById("bootLog");
+
+const bootInterval = setInterval(()=>{
+  if(bootIndex < bootLines.length){
+    bootLog.innerText += "\n" + bootLines[bootIndex];
+    bootIndex++;
+  } else {
+    clearInterval(bootInterval);
+    setTimeout(()=>document.getElementById("godBoot").remove(), 1000);
+  }
+}, 400);
+
+/* ============================
+   AI SELF-UPGRADE ENGINE
+============================ */
+let upgradeLevel = Number(localStorage.getItem("elite_upgrade")||0);
+
+function selfUpgrade(){
+  upgradeLevel++;
+  localStorage.setItem("elite_upgrade", upgradeLevel);
+  TERM.log("AI SELF UPGRADE LEVEL: "+upgradeLevel);
+}
+setInterval(selfUpgrade, 30000); // upgrade every 30s
+
+/* ============================
+   QUANTUM RANDOM BRAIN CORE
+============================ */
+function quantumThought(){
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let out = "";
+  for(let i=0;i<64;i++){
+    out += chars[Math.floor(Math.random()*chars.length)];
+  }
+  return out;
+}
+setInterval(()=>{
+  REALVEC.add("quantum:"+quantumThought());
+}, 15000);
+
+/* ============================
+   HACKER TERMINAL MODE
+============================ */
+function hackerMode(){
+  document.body.style.background="black";
+  document.body.style.color="lime";
+  document.body.style.fontFamily="monospace";
+  TERM.log("HACKER MODE ENABLED");
+}
+
+/* Extend terminal commands */
+const eliteCommandOld2 = eliteCommand;
+eliteCommand = function(cmd){
+  eliteCommandOld2(cmd);
+  if(cmd==="hacker") hackerMode();
+  if(cmd==="upgrade") selfUpgrade();
+  if(cmd==="status"){
+    alert("Upgrade Level: "+upgradeLevel+"\nMemory Size: "+REALVEC.db.length);
+  }
+};
+
+/* ============================
+   AUTO AI CORE EXPANDER (MONSTER LINE INFLATOR)
+============================ */
+function inflateCode(){
+  let filler = "";
+  for(let i=0;i<10000;i++){
+    filler += "// EliteCore filler neural line "+i+"\n";
+  }
+  console.log(filler);
+  TERM.log("Monster Code Inflated in Console");
+}
+
+/* GOD MODE ACTIVATED */
+TERM.log("ELITECORE GOD CORE ONLINE");
+</script>
+
 </body>
 </html>
